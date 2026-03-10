@@ -315,6 +315,12 @@ impl Service {
                 } else {
                     tracing::info!("New connection to be added {:?}, forcing re-read", &conn);
                     self.force_state_read().await?;
+                    self.events.send(Event::SystemChanged {
+                        scope: (Scope::Network),
+                    })?;
+                    self.events.send(Event::ProposalChanged {
+                        scope: (Scope::Network),
+                    })?;
                     return Ok(Some(NetworkChange::ConnectionAdded(*conn)));
                 }
             }
@@ -364,6 +370,9 @@ impl Service {
             }
             Action::AddDevice(device) => {
                 self.state.add_device(*device.clone())?;
+                self.events.send(Event::SystemChanged {
+                    scope: (Scope::Network),
+                })?;
                 return Ok(Some(NetworkChange::DeviceAdded(*device)));
             }
             Action::UpdateDevice(name, device) => {
@@ -373,10 +382,16 @@ impl Service {
                     }
                 }
                 self.state.update_device(&name, *device.clone())?;
+                self.events.send(Event::SystemChanged {
+                    scope: (Scope::Network),
+                })?;
                 return Ok(Some(NetworkChange::DeviceUpdated(name, *device)));
             }
             Action::RemoveDevice(name) => {
                 self.state.remove_device(&name)?;
+                self.events.send(Event::SystemChanged {
+                    scope: (Scope::Network),
+                })?;
                 return Ok(Some(NetworkChange::DeviceRemoved(name)));
             }
             Action::GetDevices(tx) => {
@@ -492,6 +507,12 @@ impl Service {
             .call(progress::message::Finish::new(Scope::Network))
             .await?;
         self.events.send(Event::ConfigChanged {
+            scope: (Scope::Network),
+        })?;
+        self.events.send(Event::ProposalChanged {
+            scope: (Scope::Network),
+        })?;
+        self.events.send(Event::SystemChanged {
             scope: (Scope::Network),
         })?;
 
