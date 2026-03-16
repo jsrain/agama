@@ -96,11 +96,11 @@ impl<'a> ConnectionFromProxyBuilder<'a> {
             Ok(mut connection) => {
                 connection.flags = flags;
                 connection.persistent = flags == 0;
-                return Ok(connection);
+                Ok(connection)
             }
             Err(e) => {
                 tracing::warn!("Could not process connection: {}", e);
-                return Err(e);
+                Err(e)
             }
         }
     }

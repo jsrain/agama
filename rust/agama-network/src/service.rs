@@ -321,7 +321,7 @@ impl Service {
                     self.events.send(Event::ProposalChanged {
                         scope: (Scope::Network),
                     })?;
-                    return Ok(Some(NetworkChange::ConnectionAdded(*conn)));
+                    return Ok(Some(NetworkChange::ConnectionAdded(Box::new(*conn))));
                 }
             }
             Action::GetGeneralState(tx) => {

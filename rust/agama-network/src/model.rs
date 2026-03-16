@@ -1809,7 +1809,7 @@ pub struct TunConfig {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum NetworkChange {
-    ConnectionAdded(Connection),
+    ConnectionAdded(Box<Connection>),
     ConnectionRemoved(Uuid),
     /// A new device has been added.
     DeviceAdded(Device),
