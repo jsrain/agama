@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 16 12:56:47 UTC 2026 - David Diaz <dgonzalez@suse.com>
+
+- Change network web user interface to offer more control and
+  interaction with connections (gh#agama-project/agama#3247).
+
+-------------------------------------------------------------------
 Mon Mar 16 12:40:42 UTC 2026 - José Iván López González <jlopez@suse.com>
 
 - Prevent error when there is no zFCP config
