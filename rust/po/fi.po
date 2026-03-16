@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-06 10:32+0000\n"
-"PO-Revision-Date: 2026-01-26 20:04+0000\n"
+"POT-Creation-Date: 2026-03-13 11:58+0000\n"
+"PO-Revision-Date: 2026-03-11 07:04+0000\n"
 "Last-Translator: Timo Jyrinki <tjyrinki@suse.com>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/agama/agama-rust-"
 "master/fi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: agama-autoinstall/src/questions.rs:41 agama-utils/src/api/question.rs:293
 #: agama-utils/src/question/start.rs:54
@@ -29,81 +29,79 @@ msgstr "Ei"
 msgid "Yes"
 msgstr "Kyllä"
 
-#: agama-manager/src/tasks/runner.rs:185
+#: agama-manager/src/actions.rs:86
 msgid "Prepare the system"
 msgstr "Valmistele järjestelmä"
 
-#: agama-manager/src/tasks/runner.rs:186
+#: agama-manager/src/actions.rs:87
 msgid "Install software"
 msgstr "Asenna ohjelmistoja"
 
-#: agama-manager/src/tasks/runner.rs:187
+#: agama-manager/src/actions.rs:88
 msgid "Configure the system"
 msgstr "Tee järjestelmän asetukset"
 
-#: agama-manager/src/tasks/runner.rs:285
+#: agama-manager/src/actions.rs:186
 msgid "Storing security settings"
-msgstr ""
+msgstr "Tallennetaan tietoturva-asetuksia"
 
-#: agama-manager/src/tasks/runner.rs:286
+#: agama-manager/src/actions.rs:187
 msgid "Setting up the hostname"
-msgstr ""
+msgstr "Asetataan isäntänimi"
 
-#: agama-manager/src/tasks/runner.rs:287
+#: agama-manager/src/actions.rs:188
 msgid "Setting up the network proxy"
-msgstr ""
+msgstr "Asetetaan verkkovälipalvelinta"
 
-#: agama-manager/src/tasks/runner.rs:288
+#: agama-manager/src/actions.rs:189
 msgid "Importing user files"
-msgstr ""
+msgstr "Tuodaan käyttäjän tiedostoja"
 
-#: agama-manager/src/tasks/runner.rs:289
+#: agama-manager/src/actions.rs:190
 msgid "Running user pre-installation scripts"
-msgstr ""
+msgstr "Suoritetaan käyttäjään esiasennuskomentojonoja"
 
-#: agama-manager/src/tasks/runner.rs:290
+#: agama-manager/src/actions.rs:191
 msgid "Storing questions settings"
-msgstr ""
+msgstr "Tallentaan kysymysasetuksia"
 
-#: agama-manager/src/tasks/runner.rs:291
+#: agama-manager/src/actions.rs:192
 msgid "Storing localization settings"
-msgstr ""
+msgstr "Tallennetaan kotoistusasetuksia"
 
-#: agama-manager/src/tasks/runner.rs:292
+#: agama-manager/src/actions.rs:193
 msgid "Storing users settings"
-msgstr ""
+msgstr "Tallennetaan käyttäjien asetuksia"
 
-#: agama-manager/src/tasks/runner.rs:293
+#: agama-manager/src/actions.rs:194
 msgid "Configuring iSCSI devices"
-msgstr ""
+msgstr "Tehdään iSCSI-laitteiden asetuksia"
 
-#: agama-manager/src/tasks/runner.rs:297
+#: agama-manager/src/actions.rs:198
 msgid "Configuring DASD devices"
-msgstr ""
+msgstr "Tehdään DASD-laitteiden asetuksia"
 
-#: agama-manager/src/tasks/runner.rs:301
+#: agama-manager/src/actions.rs:202
 msgid "Setting up the network"
-msgstr ""
+msgstr "Tehdään verkkoasetuksia"
 
-#: agama-manager/src/tasks/runner.rs:306
-#, fuzzy
+#: agama-manager/src/actions.rs:207
 msgid "Preparing the software proposal"
-msgstr "Lasketaan ohjelmistoehdotusta"
+msgstr "Valmistellaan ohjelmistoehdotusta"
 
-#: agama-manager/src/tasks/runner.rs:307
-#, fuzzy
+#: agama-manager/src/actions.rs:208
 msgid "Preparing the storage proposal"
-msgstr "Lasketaan ohjelmistoehdotusta"
+msgstr "Valmistellaan tallennustilaehdotusta"
 
-#: agama-manager/src/tasks/runner.rs:308
+#: agama-manager/src/actions.rs:209
 msgid "Storing bootloader settings"
-msgstr ""
+msgstr "Tallennetaan käynnistyslataimen asetuksia"
 
-#: agama-network/src/service.rs:518
+#: agama-network/src/service.rs:526
 msgid "Writing configuration"
 msgstr "Kirjoitetaan asetuksia"
 
-#: agama-network/src/service.rs:519
+#: agama-network/src/service.rs:527
 msgid "Reading configuration"
 msgstr "Luetaan asetuksia"
 
@@ -158,72 +156,71 @@ msgstr "Ohita tämä kohta"
 
 #: agama-software/src/model/packages.rs:54
 msgid "package"
-msgstr ""
+msgstr "paketti"
 
 #: agama-software/src/model/packages.rs:55
 msgid "pattern"
-msgstr ""
+msgstr "kuvio"
 
 #: agama-software/src/model/packages.rs:56
 msgid "product"
-msgstr ""
+msgstr "tuote"
 
-#: agama-software/src/service.rs:281
+#: agama-software/src/service.rs:308
 msgid ""
 "Due to an internal error, it was not possible to create a software proposal."
-msgstr ""
+msgstr "Ohjelmistoehdotusta ei voi luoda sisäisen virheen takia."
 
-#: agama-software/src/zypp_server.rs:322
+#: agama-software/src/zypp_server.rs:332
 msgid "Updating the list of repositories"
 msgstr "Päivitetään ohjelmalähteiden luetteloa"
 
-#: agama-software/src/zypp_server.rs:323
+#: agama-software/src/zypp_server.rs:333
 msgid "Refreshing metadata from the repositories"
 msgstr "Päivitetään metatietoja ohjelmalähteistä"
 
-#: agama-software/src/zypp_server.rs:324
+#: agama-software/src/zypp_server.rs:334
 msgid "Calculating the software proposal"
 msgstr "Lasketaan ohjelmistoehdotusta"
 
-#: agama-software/src/zypp_server.rs:327
+#: agama-software/src/zypp_server.rs:337
 msgid "Registering the system"
 msgstr "Rekisteröidään järjestelmää"
 
 #. TRANSLATORS: %s is the alias of the repository.
-#: agama-software/src/zypp_server.rs:391
+#: agama-software/src/zypp_server.rs:401
 msgid "Could not remove the repository %s"
-msgstr ""
+msgstr "Ohjelmalähdettä %s ei voi poistaa"
 
-#: agama-software/src/zypp_server.rs:411
-#, fuzzy
+#: agama-software/src/zypp_server.rs:421
 msgid "Could not read the repositories"
-msgstr "Päivitetään metatietoja ohjelmalähteistä"
+msgstr "Ohjelmalähteitä ei voi lukea"
 
-#: agama-software/src/zypp_server.rs:434
+#: agama-software/src/zypp_server.rs:454
 msgid ""
 "Failed to find the product in the repositories. You might need to register "
 "the system."
 msgstr ""
+"Tuotetta ei löydy ohjelmalähteistä. Järjestelmä tulee mahdollisesti "
+"rekisteröidä."
 
-#: agama-software/src/zypp_server.rs:439
-#, fuzzy
+#: agama-software/src/zypp_server.rs:459
 msgid "Failed to find the product in the repositories."
-msgstr "Päivitetään ohjelmalähteiden luetteloa"
+msgstr "Tuotetta ei löydy ohjelmalähteistä."
 
-#: agama-software/src/zypp_server.rs:497
+#: agama-software/src/zypp_server.rs:517
 msgid "There are conflicts in the software selection"
-msgstr ""
+msgstr "Ohjelmistoasetuksissa on ristiriitoja"
 
 #. TRANSLATORS: the first %s is the kind of resolvable (e.g., "package")
 #. and the second %s is the name of the resolvable.
-#: agama-software/src/zypp_server.rs:526
+#: agama-software/src/zypp_server.rs:546
 msgid "Could not select %s '%s' for installation"
-msgstr ""
+msgstr "Asennukseen ei voi valita: %s ”%s”"
 
-#: agama-software/src/zypp_server.rs:931
-#, fuzzy
+#: agama-software/src/zypp_server.rs:951
 msgid "Failed to register the system"
-msgstr "Rekisteröidään järjestelmää"
+msgstr "Järjestelmä rekisteröinti ei onnistu"
 
 #: agama-users/src/service.rs:140
 msgid ""

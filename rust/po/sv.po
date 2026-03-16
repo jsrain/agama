@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-06 10:32+0000\n"
-"PO-Revision-Date: 2026-03-07 14:04+0000\n"
+"POT-Creation-Date: 2026-03-13 11:58+0000\n"
+"PO-Revision-Date: 2026-03-09 08:04+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/agama/agama-rust-"
 "master/sv/>\n"
@@ -29,79 +29,79 @@ msgstr "Nej"
 msgid "Yes"
 msgstr "Ja"
 
-#: agama-manager/src/tasks/runner.rs:185
+#: agama-manager/src/actions.rs:86
 msgid "Prepare the system"
 msgstr "Förbered systemet"
 
-#: agama-manager/src/tasks/runner.rs:186
+#: agama-manager/src/actions.rs:87
 msgid "Install software"
 msgstr "Installera programvara"
 
-#: agama-manager/src/tasks/runner.rs:187
+#: agama-manager/src/actions.rs:88
 msgid "Configure the system"
 msgstr "Konfigurera systemet"
 
-#: agama-manager/src/tasks/runner.rs:285
+#: agama-manager/src/actions.rs:186
 msgid "Storing security settings"
 msgstr "Lagrar säkerhetsinställningar"
 
-#: agama-manager/src/tasks/runner.rs:286
+#: agama-manager/src/actions.rs:187
 msgid "Setting up the hostname"
 msgstr "Ställer in värdnamnet"
 
-#: agama-manager/src/tasks/runner.rs:287
+#: agama-manager/src/actions.rs:188
 msgid "Setting up the network proxy"
 msgstr "Ställer in nätverksproxy"
 
-#: agama-manager/src/tasks/runner.rs:288
+#: agama-manager/src/actions.rs:189
 msgid "Importing user files"
 msgstr "Importerar användarfiler"
 
-#: agama-manager/src/tasks/runner.rs:289
+#: agama-manager/src/actions.rs:190
 msgid "Running user pre-installation scripts"
 msgstr "Kör användargenererade förinstallationsskript"
 
-#: agama-manager/src/tasks/runner.rs:290
+#: agama-manager/src/actions.rs:191
 msgid "Storing questions settings"
 msgstr "Lagrar frågeinställningar"
 
-#: agama-manager/src/tasks/runner.rs:291
+#: agama-manager/src/actions.rs:192
 msgid "Storing localization settings"
 msgstr "Lagrar lokaliseringsinställningar"
 
-#: agama-manager/src/tasks/runner.rs:292
+#: agama-manager/src/actions.rs:193
 msgid "Storing users settings"
 msgstr "Lagrar användarinställningar"
 
-#: agama-manager/src/tasks/runner.rs:293
+#: agama-manager/src/actions.rs:194
 msgid "Configuring iSCSI devices"
 msgstr "Konfigurerar iSCSI-enheter"
 
-#: agama-manager/src/tasks/runner.rs:297
+#: agama-manager/src/actions.rs:198
 msgid "Configuring DASD devices"
 msgstr "Konfigurerar DASD-enheter"
 
-#: agama-manager/src/tasks/runner.rs:301
+#: agama-manager/src/actions.rs:202
 msgid "Setting up the network"
 msgstr "Konfigurerar nätverket"
 
-#: agama-manager/src/tasks/runner.rs:306
+#: agama-manager/src/actions.rs:207
 msgid "Preparing the software proposal"
 msgstr "Förbereder programvaruförslag"
 
-#: agama-manager/src/tasks/runner.rs:307
+#: agama-manager/src/actions.rs:208
 msgid "Preparing the storage proposal"
 msgstr "Förbereder lagringsförslag"
 
-#: agama-manager/src/tasks/runner.rs:308
+#: agama-manager/src/actions.rs:209
 msgid "Storing bootloader settings"
 msgstr "Lagrar starthanterare inställningar"
 
-#: agama-network/src/service.rs:518
+#: agama-network/src/service.rs:526
 msgid "Writing configuration"
 msgstr "Skriver konfiguration"
 
-#: agama-network/src/service.rs:519
+#: agama-network/src/service.rs:527
 msgid "Reading configuration"
 msgstr "Läser konfiguration"
 
@@ -166,59 +166,59 @@ msgstr "mönster"
 msgid "product"
 msgstr "produkt"
 
-#: agama-software/src/service.rs:281
+#: agama-software/src/service.rs:308
 msgid ""
 "Due to an internal error, it was not possible to create a software proposal."
 msgstr ""
+"På grund av ett internt fel gick det inte att skapa ett programvaru förslag."
 
-#: agama-software/src/zypp_server.rs:322
+#: agama-software/src/zypp_server.rs:332
 msgid "Updating the list of repositories"
 msgstr "Uppdaterar listan över förråd"
 
-#: agama-software/src/zypp_server.rs:323
+#: agama-software/src/zypp_server.rs:333
 msgid "Refreshing metadata from the repositories"
 msgstr "Uppdaterar metadata från förråd"
 
-#: agama-software/src/zypp_server.rs:324
+#: agama-software/src/zypp_server.rs:334
 msgid "Calculating the software proposal"
 msgstr "Beräknar programvaruförslag"
 
-#: agama-software/src/zypp_server.rs:327
+#: agama-software/src/zypp_server.rs:337
 msgid "Registering the system"
 msgstr "Registrerar systemet"
 
 #. TRANSLATORS: %s is the alias of the repository.
-#: agama-software/src/zypp_server.rs:391
+#: agama-software/src/zypp_server.rs:401
 msgid "Could not remove the repository %s"
 msgstr "Kunde ta bort förråd %s"
 
-#: agama-software/src/zypp_server.rs:411
+#: agama-software/src/zypp_server.rs:421
 msgid "Could not read the repositories"
 msgstr "Kunde inte läsa från förråd"
 
-#: agama-software/src/zypp_server.rs:434
+#: agama-software/src/zypp_server.rs:454
 msgid ""
 "Failed to find the product in the repositories. You might need to register "
 "the system."
 msgstr ""
+"Misslyckades att hitta produkt i förråd. Du kan behöva registrera systemet."
 
-#: agama-software/src/zypp_server.rs:439
-#, fuzzy
+#: agama-software/src/zypp_server.rs:459
 msgid "Failed to find the product in the repositories."
-msgstr "Uppdaterar listan över förråd"
+msgstr "Misslyckades att hitta produkt i förråd."
 
-#: agama-software/src/zypp_server.rs:497
-#, fuzzy
+#: agama-software/src/zypp_server.rs:517
 msgid "There are conflicts in the software selection"
-msgstr "Det finns konflikter i programvalen"
+msgstr "Det finns konflikter i programvaruval"
 
 #. TRANSLATORS: the first %s is the kind of resolvable (e.g., "package")
 #. and the second %s is the name of the resolvable.
-#: agama-software/src/zypp_server.rs:526
+#: agama-software/src/zypp_server.rs:546
 msgid "Could not select %s '%s' for installation"
 msgstr "Kunde inte välja %s '%s' för installation"
 
-#: agama-software/src/zypp_server.rs:931
+#: agama-software/src/zypp_server.rs:951
 msgid "Failed to register the system"
 msgstr "Misslyckades att registrera systemet"
 
