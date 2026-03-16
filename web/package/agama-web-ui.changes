@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 16 17:06:05 UTC 2026 - David Diaz <dgonzalez@suse.com>
+
+- Prevent bulk selection using stale data (gh#agama-project/agama#3289).
+
+-------------------------------------------------------------------
 Mon Mar 16 10:53:53 UTC 2026 - Ancor Gonzalez Sosa <ancor@suse.com>
 
 - Prevent error when displaying reused LVM VGs (related to
