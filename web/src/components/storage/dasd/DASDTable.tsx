@@ -534,7 +534,7 @@ const createColumns = () => [
   {
     // TRANSLATORS: table header for a DASD devices table
     name: _("Status"),
-    value: (d: Device) => STATUS_OPTIONS[d.status],
+    value: (d: Device) => _(STATUS_OPTIONS[d.status]),
     sortingKey: "status",
   },
   {

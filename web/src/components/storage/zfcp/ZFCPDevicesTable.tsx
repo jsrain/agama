@@ -338,7 +338,7 @@ const createColumns = (checkLunScan: CheckLunScanFn) => [
   {
     // TRANSLATORS: table header for a zFCP devices table.
     name: _("Status"),
-    value: (d: System.Device) => STATUS_OPTIONS[d.active ? "activated" : "deactivated"],
+    value: (d: System.Device) => _(STATUS_OPTIONS[d.active ? "activated" : "deactivated"]),
     sortingKey: "active",
   },
   {
