@@ -21,8 +21,7 @@
 use crate::service;
 use agama_utils::api::users::config::{FirstUserConfig, RootUserConfig, UserPassword};
 use agama_utils::api::users::Config;
-use std::fs;
-use std::fs::{OpenOptions, Permissions};
+use std::fs::{self, OpenOptions, Permissions};
 use std::io::Write;
 use std::ops::{Deref, DerefMut};
 use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
@@ -133,9 +132,8 @@ impl Model {
             return;
         };
 
-        let useradd = self.useradd(user_name);
-        if let Err(useradd) = useradd {
-            tracing::error!("Failed to create initial user: {useradd:?}");
+        if let Err(err) = self.useradd(user_name) {
+            tracing::error!("Failed to create initial user: {:?}", err);
             return;
         }
 
@@ -145,21 +143,18 @@ impl Model {
             .map(|k| k.to_vec())
             .unwrap_or_default();
 
-        self.activate_ssh(
-            &PathBuf::from(format!("home/{}/.ssh/authorized_keys", user_name)),
-            &ssh_keys,
-            Some(user_name),
-        );
+        let keys_path = PathBuf::from(format!("home/{}/.ssh/authorized_keys", user_name));
+        self.activate_ssh(&keys_path, &ssh_keys, Some(user_name));
 
         self.set_user_group(user_name);
         if let Some(ref user_password) = user.password {
-            let _ = self
-                .set_user_password(user_name, user_password)
-                .inspect_err(|e| tracing::error!("Failed to set user password: {e}"));
+            if let Err(e) = self.set_user_password(user_name, user_password) {
+                tracing::error!("Failed to set user password: {e}");
+            }
         };
-        let _ = self
-            .update_user_fullname(user)
-            .inspect_err(|e| tracing::error!("Failed to set user fullname: {e}"));
+        if let Err(e) = self.update_user_fullname(user) {
+            tracing::error!("Failed to set user fullname: {e}");
+        }
     }
 
     /// Reads root's data from given config and updates root setup accordingly
@@ -170,9 +165,9 @@ impl Model {
 
         // set password for root if any
         if let Some(ref root_password) = root.password {
-            let _ = self
-                .set_user_password("root", root_password)
-                .inspect_err(|e| tracing::error!("Failed to set root password: {e}"));
+            if let Err(e) = self.set_user_password("root", root_password) {
+                tracing::error!("Failed to set root password: {e}");
+            }
         }
 
         // store sshPublicKeys for root if any
@@ -182,10 +177,10 @@ impl Model {
             .map(|k| k.to_vec())
             .unwrap_or_default();
 
-        self.activate_ssh(&PathBuf::from("root/.ssh/authorized_keys"), &ssh_keys, None);
+        self.activate_ssh(Path::new("root/.ssh/authorized_keys"), &ssh_keys, None);
     }
 
-    fn activate_ssh(&self, path: &PathBuf, ssh_keys: &[String], user: Option<&str>) {
+    fn activate_ssh(&self, path: &Path, ssh_keys: &[String], user: Option<&str>) {
         if ssh_keys.is_empty() {
             return;
         }
@@ -193,15 +188,15 @@ impl Model {
         // if some SSH keys were defined
         // - update authorized_keys file
         // - open SSH port and enable SSH service
-        let _ = self
-            .update_authorized_keys(path, ssh_keys, user)
-            .inspect_err(|e| tracing::error!("Failed to update authorized_keys file: {e}"));
-        let _ = self
-            .enable_sshd_service()
-            .inspect_err(|e| tracing::error!("Failed to enable sshd service: {e}"));
-        let _ = self
-            .open_ssh_port()
-            .inspect_err(|e| tracing::error!("Failed to open sshd port in firewall: {e}"));
+        if let Err(e) = self.update_authorized_keys(path, ssh_keys, user) {
+            tracing::error!("Failed to update authorized_keys file: {e}");
+        }
+        if let Err(e) = self.enable_sshd_service() {
+            tracing::error!("Failed to enable sshd service: {e}");
+        }
+        if let Err(e) = self.open_ssh_port() {
+            tracing::error!("Failed to open sshd port in firewall: {e}");
+        }
     }
 
     /// Sets password for given user name
@@ -267,42 +262,47 @@ impl Model {
         }
     }
 
+    /// Changes the owner and group of the target path inside the chroot environment.
+    fn chown(&self, user_name: &str, path: &Path) -> Result<(), service::Error> {
+        let abs_path = Path::new("/").join(path);
+        // unwrap here can be questionable if we want to support
+        // non-utf8 paths, but I expect more problems with that idea
+        let target_path = abs_path.to_str().unwrap().to_string();
+
+        let chown = ChrootCommand::new(self.install_dir.clone())?
+            .cmd("chown")
+            .args([format!("{}:", user_name), target_path])
+            .output()?;
+
+        if !chown.status.success() {
+            tracing::error!("chown failed {:?}", chown.stderr);
+            return Err(service::Error::CommandFailed(format!(
+                "Cannot set user for {:?}: {:?}",
+                path, chown.stderr
+            )));
+        }
+
+        Ok(())
+    }
+
     /// Updates root's authorized_keys file with SSH key
     fn update_authorized_keys(
         &self,
-        keys_path: &PathBuf,
+        keys_path: &Path,
         ssh_keys: &[String],
         user: Option<&str>,
     ) -> Result<(), service::Error> {
         let file_name = self.install_dir.join(keys_path);
         // unwrap is safe here, because we always use absolute paths
         let dir = file_name.parent().unwrap();
+
         // if .ssh does not exist we need to create it, with proper user and perms
         if !dir.exists() {
             fs::create_dir_all(dir)?;
             fs::set_permissions(dir, Permissions::from_mode(0o700))?;
 
             if let Some(user_name) = user {
-                let abs_path = Path::new("/").join(keys_path);
-                // unwrap is safe here as we explicitelly make it non relative path
-                let target_dir = abs_path.parent().unwrap();
-                // we need to run it in chroot, as user does not exist in insts_sys
-                let chown = ChrootCommand::new(self.install_dir.clone())?
-                    .cmd("chown")
-                    // unwrap here can be questionable if we want to support
-                    // non-utf8 paths, but I expect more problems with that idea
-                    .args([
-                        format!("{}:", user_name),
-                        target_dir.to_str().unwrap().to_string(),
-                    ])
-                    .output()?;
-                if !chown.status.success() {
-                    tracing::error!("User .ssh directory chown failed {:?}", chown.stderr);
-                    return Err(service::Error::CommandFailed(format!(
-                        "Cannot set user for the ssh directory: {:?}",
-                        chown.stderr
-                    )));
-                }
+                self.chown(user_name, keys_path.parent().unwrap())?;
             }
         }
 
@@ -317,31 +317,14 @@ impl Model {
         // sets mode also for an existing file
         fs::set_permissions(&file_name, Permissions::from_mode(mode))?;
 
-        ssh_keys
-            .iter()
-            .try_for_each(|ssh_key| -> Result<(), service::Error> {
-                writeln!(authorized_keys_file, "{}", ssh_key.trim())?;
-                Ok(())
-            })?;
+        for ssh_key in ssh_keys {
+            writeln!(authorized_keys_file, "{}", ssh_key.trim())?;
+        }
 
         authorized_keys_file.flush()?;
 
         if let Some(user_name) = user {
-            // unwrap here can be questionable if we want to support
-            // non-utf8 paths, but I expect more problems with that idea
-            let target_path = Path::new("/").join(keys_path).to_str().unwrap().to_string();
-            // we need to run it in chroot, as user does not exist in insts_sys
-            let chown = ChrootCommand::new(self.install_dir.clone())?
-                .cmd("chown")
-                .args([format!("{}:", user_name), target_path])
-                .output()?;
-            if !chown.status.success() {
-                tracing::error!("User .ssh directory chown failed {:?}", chown.stderr);
-                return Err(service::Error::CommandFailed(format!(
-                    "Cannot set user for the ssh directory: {:?}",
-                    chown.stderr
-                )));
-            }
+            self.chown(user_name, keys_path)?;
         }
 
         Ok(())
