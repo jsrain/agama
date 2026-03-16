@@ -38,7 +38,6 @@ import {
 } from "@patternfly/react-core";
 import Icon from "~/components/layout/Icon";
 import Text from "~/components/core/Text";
-import Popup from "~/components/core/Popup";
 import FormatActionHandler from "~/components/storage/dasd/FormatActionHandler";
 import SelectableDataTable, { SortedBy } from "~/components/core/SelectableDataTable";
 import TextinputFilter from "~/components/storage/dasd/TextinputFilter";
@@ -447,8 +446,6 @@ type DASDTableState = {
   selectedDevices: Device["channel"][];
   /** Devices selected for formatting */
   devicesToFormat: Device[];
-  /** Device IDs currently undergoing an async operation */
-  waitingFor: Device["channel"][];
 };
 
 /**
@@ -469,7 +466,6 @@ const initialState: DASDTableState = {
   },
   selectedDevices: [],
   devicesToFormat: [],
-  waitingFor: [],
 };
 
 /**
@@ -626,16 +622,6 @@ export default function DASDTable({ devices }) {
 
   return (
     <Content>
-      {!isEmpty(state.waitingFor) && (
-        <Popup isOpen title={_("Applying changes")} disableFocusTrap>
-          <Content component="p" isEditorial>
-            {_("This may take a moment while updates complete.")}
-          </Content>
-          <Content component="p">
-            {_("This message will close automatically when everything is done.")}
-          </Content>
-        </Popup>
-      )}
       <FiltersToolbar
         filters={state.filters}
         availableStatuses={availableStatuses}
