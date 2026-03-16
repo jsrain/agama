@@ -534,6 +534,7 @@ const createColumns = () => [
   {
     // TRANSLATORS: table header for a DASD devices table
     name: _("Status"),
+    // eslint-disable-next-line agama-i18n/string-literals
     value: (d: Device) => _(STATUS_OPTIONS[d.status]),
     sortingKey: "status",
   },
