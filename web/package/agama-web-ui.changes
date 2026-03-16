@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 16 17:06:05 UTC 2026 - David Diaz <dgonzalez@suse.com>
+
+- Prevent bulk selection using stale data (gh#agama-project/agama#3289).
+
+-------------------------------------------------------------------
 Mon Mar 16 16:53:39 UTC 2026 - José Iván López González <jlopez@suse.com>
 
 - Log actions failures (related to bsc#1259354).
