@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 20 07:54:46 UTC 2026 - Knut Anderssen <kanderssen@suse.com>
+
+- Fix incorrect openAPI parameters (gh#agama-project/agama#3299).
+  - Do not define params for POST '/api/v2/action'
+  - Do not define params for PUT and PATCH '/api/v2/config
+
+-------------------------------------------------------------------
 Thu Mar 19 21:11:29 UTC 2026 - Imobach Gonzalez Sosa <igonzalezsosa@suse.com>
 
 - Continue loading the configuration even if there is a network setup
