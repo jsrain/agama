@@ -308,7 +308,7 @@ async fn generate(
 
     if matches!(validity, ValidationOutcome::NotValid(_)) {
         return Err(anyhow!(
-            "Internal error: the profile was made invalid by InstallSettings round trip"
+            "Internal error: the profile became invalid during Config round trip"
         ));
     }
 
