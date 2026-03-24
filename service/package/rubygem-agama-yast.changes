@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Mon Mar 23 12:29:40 UTC 2026 - Josef Reidinger <jreidinger@suse.com>
 
-- implement setting kernel parameters for systemd boot
+- Implement setting kernel parameters for systemd boot
   (jsc#PED-10703)
 
 -------------------------------------------------------------------
