@@ -60,6 +60,9 @@ user_pref("extensions.update.autoUpdateDefault", false);
 // TODO: make the XDG portal working again, it has more features (mounting USB flash)
 user_pref("widget.use-xdg-desktop-portal.file-picker", 0);
 
+// Force user to select download location
+user_pref("browser.download.useDownloadDir", false);
+
 // configure devtools
 // show devtools in a separate window
 user_pref("devtools.toolbox.host", "window");
