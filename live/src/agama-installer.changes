@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 31 14:28:52 UTC 2026 - Shawn Dunn <sfalken@opensuse.org>
+
+- Add userChrome.css to simplify the firefox UI
+- Force user selection of download location for config/logs
+
+-------------------------------------------------------------------
 Wed Mar 25 19:18:18 UTC 2026 - Ladislav Slezák <lslezak@suse.com>
 
 - Update the OBS systemsmanagement:Agama:Devel GPG key,
